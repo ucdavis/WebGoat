@@ -1,0 +1,86 @@
+From cc113c4486b41f55a72fc25350aecca85ba7aab7 Mon Sep 17 00:00:00 2001
+From: Jefferson Capovilla <jefcap@gmail.com.com>
+Date: Sun, 9 May 2021 13:11:17 -0300
+Subject: [PATCH] Fix compilation for Intellij
+
+Fixed compiling issues.
+For the setup, one need to install:
+ -java-8-openjdk: sudo apt install openjdk-8-jdk
+ -Maven - sudo apt install maven
+
+and in WebGoat project -> Open Module Settings (F4) ->
+ Project Settings -> Project -> Project SDK -> Select java-8-openjdk-amd64
+---
+ pom.xml                                       |  5 ++++
+ webgoat-lessons/cross-site-scripting/pom.xml  | 25 +++++++------------
+ .../lessonPlans/en/Introduction.adoc          |  2 ++
+ 3 files changed, 16 insertions(+), 16 deletions(-)
+
+diff --git a/pom.xml b/pom.xml
+index 206ecb2e..508055a9 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -306,6 +306,11 @@
+             <artifactId>commons-exec</artifactId>
+             <version>1.3</version>
+         </dependency>
++        <dependency>
++		    <groupId>javax.xml.bind</groupId>
++		    <artifactId>jaxb-api</artifactId>
++		    <version>2.3.1</version>
++		</dependency>
+     </dependencies>
+ 
+     <build>
+diff --git a/webgoat-lessons/cross-site-scripting/pom.xml b/webgoat-lessons/cross-site-scripting/pom.xml
+index b8c1021f..48f9b328 100644
+--- a/webgoat-lessons/cross-site-scripting/pom.xml
++++ b/webgoat-lessons/cross-site-scripting/pom.xml
+@@ -13,23 +13,16 @@
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+-               <version>1.5.3</version>
+-
+-               <executions>
+-                   <execution>
+-                       <id>output-html</id>
+-                       <phase>generate-resources</phase>
+-                       <goals>
+-                           <goal>process-asciidoc</goal>
+-                       </goals>
+-                       <configuration>
+-                           <backend>html</backend>
+-                           <sourceDirectory>src/main/resources/lessonPlans/en/</sourceDirectory>
+-                       </configuration>
+-                   </execution>
+-
+-               </executions>
++               <version>2.1.0</version>
+            </plugin>
+        </plugins>
+    </build>
++   <dependencies>
++	   <dependency>
++	  <groupId>org.asciidoctor</groupId>
++		  <artifactId>asciidoctor-maven-plugin</artifactId>
++		  <version>2.1.0</version>
++		  <type>maven-plugin</type>
++	  </dependency>
++   </dependencies>
+ </project>
+\ No newline at end of file
+diff --git a/webgoat-lessons/webgoat-introduction/src/main/resources/lessonPlans/en/Introduction.adoc b/webgoat-lessons/webgoat-introduction/src/main/resources/lessonPlans/en/Introduction.adoc
+index c09cf136..fc932867 100644
+--- a/webgoat-lessons/webgoat-introduction/src/main/resources/lessonPlans/en/Introduction.adoc
++++ b/webgoat-lessons/webgoat-introduction/src/main/resources/lessonPlans/en/Introduction.adoc
+@@ -19,3 +19,5 @@ Thanks for your interest!
+ 
+ 
+ * Hello world *
++
++*JEFF is here!*
+\ No newline at end of file
+-- 
+2.25.1
+
