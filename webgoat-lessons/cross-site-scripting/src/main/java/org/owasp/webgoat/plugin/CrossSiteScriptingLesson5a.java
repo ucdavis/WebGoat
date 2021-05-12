@@ -1,6 +1,7 @@
 
 package org.owasp.webgoat.plugin;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.owasp.webgoat.assignments.AssignmentEndpoint;
 import org.owasp.webgoat.assignments.AssignmentPath;
 import org.owasp.webgoat.assignments.AttackResult;
@@ -64,7 +65,7 @@ public class CrossSiteScriptingLesson5a extends AssignmentEndpoint {
 		userSessionData.setValue("xss-reflected1-complete",(Object)"false");
 		StringBuffer cart = new StringBuffer();
 		cart.append("Thank you for shopping at WebGoat. <br />You're support is appreciated<hr />");
-		cart.append("<p>We have charged credit card:" + field1 + "<br />");
+		cart.append("<p>We have charged credit card ==>:" + StringEscapeUtils.escapeHtml4(field1) + "<br />");
 		cart.append(   "                             ------------------- <br />");
 		cart.append(   "                               $" + totalSale);
 
